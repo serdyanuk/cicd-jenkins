@@ -12,5 +12,24 @@ pipeline {
                 sh "go test -v ./..."
             }
         }
+        stage('Code Coverage') {
+          steps {
+             sh '''
+                  go test -coverprofile=coverage.out ./...
+                  gocover-cobertura < coverage.out > coverage.xml
+                '''
+          }
+        }
+        stage('Publish Coverage') {
+          steps {
+            recordCoverage tools: [[parser: 'COBERTURA', pattern: 'coverage.xml']]
+          }
+        }
     }
+
+  post {
+    always {
+      archiveArtifacts artifacts: 'coverage.*', fingerprint: true
+    }
+  }
 }

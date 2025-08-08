@@ -8,6 +8,8 @@ RUN curl -LO https://go.dev/dl/go1.24.0.linux-amd64.tar.gz \
 
 ENV PATH="/usr/local/go/bin:$PATH"
 
+RUN go install github.com/boumenot/gocover-cobertura@latest
+
 USER jenkins
 
 EXPOSE 8080
