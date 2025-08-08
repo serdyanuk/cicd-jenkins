@@ -13,7 +13,7 @@ func Test_SearchHistoryRepo(t *testing.T) {
 	t.Run("Should add", func(t *testing.T) {
 		repo.Add(testData)
 		got := repo.List()
-		if got[0] != "testData" {
+		if got[0] != testData {
 			t.Errorf("expected: %s, got: %s", testData, got[0])
 		}
 	})
