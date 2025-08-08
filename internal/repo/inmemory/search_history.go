@@ -28,3 +28,9 @@ func (s *SearchHistoryRepo) List() []string {
 	s.mu.RUnlock()
 	return cp
 }
+
+func (s *SearchHistoryRepo) Clean() {
+	s.mu.Lock()
+	s.list = make([]string, 0)
+	s.mu.Unlock()
+}
