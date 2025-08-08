@@ -31,6 +31,9 @@ pipeline {
   post {
     always {
       archiveArtifacts artifacts: 'coverage.*', fingerprint: true
+      slackSend channel: '#jenkins-cicd-report',
+          color: currentBuild.currentResult == 'SUCCESS' ? 'good' : 'danger',
+          message: "The pipeline ${currentBuild.fullDisplayName} finished with status: ${currentBuild.currentResult}"
     }
   }
 }
