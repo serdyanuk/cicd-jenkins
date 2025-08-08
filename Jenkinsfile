@@ -16,7 +16,7 @@ pipeline {
           steps {
              sh '''
                   go test -coverprofile=coverage.out ./...
-                  gocover-cobertura < coverage.out > coverage.xml
+                  $(go env GOPATH)/bin/gocover-cobertura < coverage.out > coverage.xml
                 '''
           }
         }
