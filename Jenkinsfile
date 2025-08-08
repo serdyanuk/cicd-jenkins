@@ -15,6 +15,7 @@ pipeline {
         stage('Code Coverage') {
           steps {
              sh '''
+                  go install github.com/boumenot/gocover-cobertura@latest
                   go test -coverprofile=coverage.out ./...
                   $(go env GOPATH)/bin/gocover-cobertura < coverage.out > coverage.xml
                 '''
